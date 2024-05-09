@@ -35,12 +35,20 @@ public static class ContactRepository
             return;
 
         var contactToUpdate = _contacts.FirstOrDefault(x => x.ContactId == contactId);
-        if(contactToUpdate != null)
+        if (contactToUpdate != null)
         {
             contactToUpdate.Address = contact.Address;
             contactToUpdate.Email = contact.Email;
             contactToUpdate.Name = contact.Name;
             contactToUpdate.Phone = contact.Phone;
         }
+    }
+
+    public static void AddContact(Contact contact)
+    {
+        var maxId = _contacts.Max(x => x.ContactId);
+        contact.ContactId = maxId + 1;
+        _contacts.Add(contact);
+
     }
 }
